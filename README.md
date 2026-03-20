@@ -42,5 +42,7 @@ This project is ideal for beginners in cybersecurity and networking.
 Clone the repository:
 
 ```bash
-git clone https://github.com/Amoonbhatti/port-scanner.git
-cd port-scanner
+git clone https://github.com/Amoonbhatti/port-scanner.git 
+cd port-scanner 
+chmod 777 port_scanner.py 
+python port_scanner.py
