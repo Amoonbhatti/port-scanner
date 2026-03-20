@@ -1,19 +1,27 @@
 import socket
 import threading
+import argparse
+from colorama import Fore, Style, init
+
+init(autoreset=True)
+
+# 🔥 Hacker Banner
+def show_banner():
+    print(Fore.RED + r"""
+██████╗  ██████╗ ██████╗ ████████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ 
+██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗
+██████╔╝██║   ██║██████╔╝   ██║       ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+██╔═══╝ ██║   ██║██╔══██╗   ██║       ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+██║     ╚██████╔╝██║  ██║   ██║       ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║
+╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+
+                ⚡ Advanced Port Scanner | By Amoon Bhatti ⚡
+    """ + Style.RESET_ALL)
 
 common_ports = {
-    21: "FTP",
-    22: "SSH",
-    23: "Telnet",
-    25: "SMTP",
-    53: "DNS",
-    80: "HTTP",
-    110: "POP3",
-    139: "NetBIOS",
-    143: "IMAP",
-    443: "HTTPS",
-    445: "SMB",
-    8080: "HTTP-Alt"
+    21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP",
+    53: "DNS", 80: "HTTP", 110: "POP3", 139: "NetBIOS",
+    143: "IMAP", 443: "HTTPS", 445: "SMB", 8080: "HTTP-Alt"
 }
 
 def scan_port(port):
@@ -31,7 +39,7 @@ def scan_port(port):
             except:
                 banner = "No banner"
 
-            print(f"[OPEN] Port {port} ({service}) | {banner}")
+            print(Fore.GREEN + f"[OPEN] Port {port} ({service}) | {banner}")
 
         sock.close()
 
@@ -39,30 +47,34 @@ def scan_port(port):
         pass
 
 
-try:
-    target = input("Enter target (IP or domain): ")
-    start_port = int(input("Enter start port: "))
-    end_port = int(input("Enter end port: "))
+# 🔥 CLI arguments
+parser = argparse.ArgumentParser(description="Advanced Port Scanner")
+parser.add_argument("target", help="Target IP or domain")
+parser.add_argument("-p", "--ports", default="1-1000", help="Port range")
+parser.add_argument("-t", "--threads", type=int, default=50, help="Threads")
 
-    print(f"\n⚡ Scanning {target} from port {start_port} to {end_port}...\n")
+args = parser.parse_args()
 
-    threads = []
+target = args.target
+start_port, end_port = map(int, args.ports.split("-"))
 
-    for port in range(start_port, end_port + 1):
-        t = threading.Thread(target=scan_port, args=(port,))
-        threads.append(t)
-        t.start()
+show_banner()
 
-    for t in threads:
-        t.join()
+print(Fore.YELLOW + f"\n⚡ Scanning {target} from port {start_port} to {end_port} using {args.threads} threads...\n")
 
-    print("\nScan Completed ⚡🔥")
+threads = []
 
-except ValueError:
-    print("❌ Please enter valid port numbers!")
+for port in range(start_port, end_port + 1):
+    t = threading.Thread(target=scan_port, args=(port,))
+    threads.append(t)
+    t.start()
 
-except socket.gaierror:
-    print("❌ Invalid target. Check domain/IP!")
+    if len(threads) >= args.threads:
+        for th in threads:
+            th.join()
+        threads = []
 
-except KeyboardInterrupt:
-    print("\n⛔ Scan stopped by user")
+for th in threads:
+    th.join()
+
+print(Fore.CYAN + "\nScan Completed ⚡🔥")
