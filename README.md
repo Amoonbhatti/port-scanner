@@ -6,10 +6,10 @@
 
 ## 💀 About
 
-PORT SCANNER is a simple yet powerful tool designed to detect open ports on a target system.  
+PORT SCANNER is a simple and powerful tool designed to detect open ports on a target system.  
 It is built using Python and supports both interactive and command-line usage.
 
-This project is ideal for beginners in cybersecurity and networking who want to understand how port scanning works.
+This project is ideal for beginners in cybersecurity and networking.
 
 ---
 
@@ -18,10 +18,9 @@ This project is ideal for beginners in cybersecurity and networking who want to 
 - ⚡ Fast multithreaded scanning  
 - 🎯 Custom port range selection  
 - 🧠 Common service detection (HTTP, FTP, SSH, etc.)  
-- 📡 Banner grabbing (service responses)  
+- 📡 Banner grabbing  
 - 💾 Save results to file  
 - 🔄 Real-time scan progress  
-- 🎨 Clean terminal output  
 - 🧑‍💻 Interactive + CLI modes  
 
 ---
