@@ -8,10 +8,8 @@ init(autoreset=True)
 
 # 🎯 Banner
 def show_banner():
-    os.system("clear")  # Kali/Linux ke liye
-
+    os.system("clear")
     print(Fore.CYAN + Style.BRIGHT + r"""
-   
 ██████╗  ██████╗ ██████╗ ████████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ 
 ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗
 ██████╔╝██║   ██║██████╔╝   ██║       ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
@@ -24,12 +22,21 @@ def show_banner():
     """ + Style.RESET_ALL)
 
 
-# 🔍 Common ports mapping
+# 🔍 Common ports
 common_ports = {
-    21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP",
-    53: "DNS", 80: "HTTP", 110: "POP3", 139: "NetBIOS",
-    143: "IMAP", 443: "HTTPS", 445: "SMB", 8080: "HTTP-Alt"
+    21: "FTP", 22: "SSH", 25: "SMTP",
+    53: "DNS", 80: "HTTP", 110: "POP3",
+    143: "IMAP", 443: "HTTPS"
 }
+
+# 📁 File handle global
+output_file = None
+
+
+def log_output(text):
+    print(text)
+    if output_file:
+        output_file.write(text + "\n")
 
 
 # 🔎 Scan function
@@ -48,7 +55,7 @@ def scan_port(port):
             except:
                 banner = "No banner"
 
-            print(Fore.GREEN + f"[OPEN] Port {port} ({service}) | {banner}")
+            log_output(Fore.GREEN + f"[OPEN] Port {port} ({service}) | {banner}")
 
         sock.close()
 
@@ -56,21 +63,21 @@ def scan_port(port):
         pass
 
 
-# 🧠 Argument parser (CLI mode)
+# 🧠 CLI args
 parser = argparse.ArgumentParser(description="Advanced Port Scanner")
 parser.add_argument("target", nargs='?', help="Target IP or domain")
 parser.add_argument("-p", "--ports", help="Port range (e.g. 1-1000)")
-parser.add_argument("-t", "--threads", type=int, default=50, help="Threads")
+parser.add_argument("-t", "--threads", type=int, default=50)
+parser.add_argument("-o", "--output", help="Save results to file")
 
 args = parser.parse_args()
 
 
-# 🔥 Banner sab se pehle
+# 🎬 Banner
 show_banner()
 
 
-# 🎯 HYBRID MODE
-
+# 🔥 Hybrid mode
 if args.target:
     target = args.target
 
@@ -80,18 +87,22 @@ if args.target:
         start_port, end_port = 1, 1000
 
 else:
-    # 👉 Interactive mode
-    target = input("Enter target (IP or domain): ")
+    target = input("Enter target: ")
     start_port = int(input("Enter start port: "))
     end_port = int(input("Enter end port: "))
 
 
 threads_count = args.threads
 
-print(Fore.YELLOW + f"\n⚡ Scanning {target} from port {start_port} to {end_port} using {threads_count} threads...\n")
+# 📁 File open
+if args.output:
+    output_file = open(args.output, "w")
 
 
-# ⚡ Multithreading
+log_output(Fore.YELLOW + f"\n⚡ Scanning {target} from port {start_port} to {end_port}...\n")
+
+
+# ⚡ Threads
 threads = []
 
 for port in range(start_port, end_port + 1):
@@ -108,4 +119,8 @@ for th in threads:
     th.join()
 
 
-print(Fore.CYAN + Style.BRIGHT + "\nScan Completed ⚡🔥\n")
+log_output(Fore.CYAN + "\nScan Completed ⚡🔥\n")
+
+# 📁 Close file
+if output_file:
+    output_file.close()
