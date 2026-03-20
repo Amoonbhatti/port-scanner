@@ -1,6 +1,6 @@
 import socket
+import threading
 
-# Common ports with service names
 common_ports = {
     21: "FTP",
     22: "SSH",
@@ -16,30 +16,47 @@ common_ports = {
     8080: "HTTP-Alt"
 }
 
+def scan_port(port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+
+        result = sock.connect_ex((target, port))
+
+        if result == 0:
+            service = common_ports.get(port, "Unknown")
+
+            try:
+                banner = sock.recv(1024).decode().strip()
+            except:
+                banner = "No banner"
+
+            print(f"[OPEN] Port {port} ({service}) | {banner}")
+
+        sock.close()
+
+    except:
+        pass
+
+
 try:
     target = input("Enter target (IP or domain): ")
     start_port = int(input("Enter start port: "))
     end_port = int(input("Enter end port: "))
 
-    print(f"\nScanning {target} from port {start_port} to {end_port}...\n")
+    print(f"\n⚡ Scanning {target} from port {start_port} to {end_port}...\n")
+
+    threads = []
 
     for port in range(start_port, end_port + 1):
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            socket.setdefaulttimeout(0.5)
+        t = threading.Thread(target=scan_port, args=(port,))
+        threads.append(t)
+        t.start()
 
-            result = sock.connect_ex((target, port))
+    for t in threads:
+        t.join()
 
-            if result == 0:
-                service = common_ports.get(port, "Unknown")
-                print(f"[OPEN] Port {port} ({service})")
-
-            sock.close()
-
-        except:
-            continue
-
-    print("\nScan Completed ✅")
+    print("\nScan Completed ⚡🔥")
 
 except ValueError:
     print("❌ Please enter valid port numbers!")
