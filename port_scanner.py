@@ -1,5 +1,21 @@
 import socket
 
+# Common ports with service names
+common_ports = {
+    21: "FTP",
+    22: "SSH",
+    23: "Telnet",
+    25: "SMTP",
+    53: "DNS",
+    80: "HTTP",
+    110: "POP3",
+    139: "NetBIOS",
+    143: "IMAP",
+    443: "HTTPS",
+    445: "SMB",
+    8080: "HTTP-Alt"
+}
+
 target = input("Enter target (IP or domain): ")
 start_port = int(input("Enter start port: "))
 end_port = int(input("Enter end port: "))
@@ -13,7 +29,8 @@ for port in range(start_port, end_port + 1):
     result = sock.connect_ex((target, port))
 
     if result == 0:
-        print(f"[+] Port {port} is OPEN")
+        service = common_ports.get(port, "Unknown")
+        print(f"[OPEN] Port {port} ({service})")
 
     sock.close()
 
