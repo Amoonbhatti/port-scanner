@@ -1,38 +1,49 @@
 # ⚡ PORT SCANNER ⚡
 
 <p align="center">
-  <img src="assets/banner.png" width="800">
+  <img src="https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python">
+  <img src="https://img.shields.io/badge/Multithreading-Enabled-success?style=for-the-badge">
+  <img src="https://img.shields.io/badge/CLI-Tool-orange?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge">
 </p>
 
-> A fast, multithreaded Python port scanner for cybersecurity learning and network analysis.
+<p align="center">
+  <img src="assets/banner.png" width="900">
+</p>
+
+> ⚡ Scan smarter. Detect faster. Think like a hacker.
 
 ---
 
 ## 💀 About
 
-PORT SCANNER is a simple and powerful tool designed to detect open ports on a target system.  
-It is built using Python and supports both interactive and command-line usage.
+**PORT SCANNER** is a fast, multithreaded Python-based tool designed to detect open ports on a target system.
 
-This project is ideal for beginners in cybersecurity and networking.
+It mimics the core behavior of real-world tools like Nmap while keeping the implementation simple, clean, and beginner-friendly.
+
+This project is perfect for:
+- Cybersecurity learners  
+- Networking students  
+- Developers exploring sockets & multithreading  
 
 ---
 
 ## 🚀 Features
 
-- ⚡ Fast multithreaded scanning  
-- 🎯 Custom port range selection  
-- 🧠 Common service detection (HTTP, FTP, SSH, etc.)  
-- 📡 Banner grabbing  
-- 💾 Save results to file  
+- ⚡ Blazing fast multithreaded scanning  
+- 🎯 Fully customizable port ranges  
+- 🧠 Intelligent service detection  
+- 📡 Advanced banner grabbing  
+- 💾 Export scan results to file  
 - 🔄 Real-time scan progress  
-- 🧑‍💻 Interactive + CLI modes  
+- 🧑‍💻 Dual mode: Interactive + CLI  
 
 ---
 
 ## 📸 Preview
 
 <p align="center">
-  <img src="assets/preview.png" width="800">
+  <img src="assets/preview.png" width="900">
 </p>
 
 ---
@@ -42,7 +53,5 @@ This project is ideal for beginners in cybersecurity and networking.
 Clone the repository:
 
 ```bash
-git clone https://github.com/Amoonbhatti/port-scanner.git 
-cd port-scanner 
-chmod 777 port_scanner.py 
-python port_scanner.py
+git clone https://github.com/Amoonbhatti/port-scanner.git
+cd port-scanner
