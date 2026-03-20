@@ -1,13 +1,15 @@
 # ⚡ PORT SCANNER ⚡
 
-> A fast, multithreaded Python port scanner built for cybersecurity learning and networking exploration.
+> A fast, multithreaded Python port scanner for cybersecurity learning and network analysis.
 
 ---
 
 ## 💀 About
 
-This is a powerful yet simple port scanning tool that allows you to detect open ports on a target system.  
-Built with performance and simplicity in mind, this tool provides a hacker-style interface with real-time scanning output.
+PORT SCANNER is a simple yet powerful tool designed to detect open ports on a target system.  
+It is built using Python and supports both interactive and command-line usage.
+
+This project is ideal for beginners in cybersecurity and networking who want to understand how port scanning works.
 
 ---
 
@@ -17,16 +19,17 @@ Built with performance and simplicity in mind, this tool provides a hacker-style
 - 🎯 Custom port range selection  
 - 🧠 Common service detection (HTTP, FTP, SSH, etc.)  
 - 📡 Banner grabbing (service responses)  
-- 💾 Save scan results to file  
-- 🔄 Real-time progress indicator  
-- 🎨 Clean terminal UI (hacker-style)  
+- 💾 Save results to file  
+- 🔄 Real-time scan progress  
+- 🎨 Clean terminal output  
 - 🧑‍💻 Interactive + CLI modes  
 
 ---
 
 ## 🛠️ Installation
 
+Clone the repository:
+
 ```bash
 git clone https://github.com/Amoonbhatti/port-scanner.git
 cd port-scanner
-pip install colorama
