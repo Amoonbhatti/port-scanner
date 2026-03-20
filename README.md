@@ -1,29 +1,32 @@
-# 🚀 Port Scanner Tool
+# ⚡ PORT SCANNER ⚡
 
-![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
-![Status](https://img.shields.io/badge/Status-Active-success)
-![Cybersecurity](https://img.shields.io/badge/Field-Cybersecurity-red)
+> A fast, multithreaded Python port scanner built for cybersecurity learning and networking exploration.
 
 ---
 
-## 🔥 About the Tool
+## 💀 About
 
-A powerful and simple **Python-based port scanner** that helps you identify open ports on any target system.
-
-> Built for learning **Cybersecurity, Networking & Ethical Hacking**
-
----
-
-## ⚡ Features
-
-- 🔍 Scan open ports on any IP/domain  
-- ⚡ Fast scanning with timeout optimization  
-- 💻 Beginner-friendly code  
-- 🛡️ Useful for penetration testing basics  
+This is a powerful yet simple port scanning tool that allows you to detect open ports on a target system.  
+Built with performance and simplicity in mind, this tool provides a hacker-style interface with real-time scanning output.
 
 ---
 
-## 🖥️ Usage
+## 🚀 Features
+
+- ⚡ Fast multithreaded scanning  
+- 🎯 Custom port range selection  
+- 🧠 Common service detection (HTTP, FTP, SSH, etc.)  
+- 📡 Banner grabbing (service responses)  
+- 💾 Save scan results to file  
+- 🔄 Real-time progress indicator  
+- 🎨 Clean terminal UI (hacker-style)  
+- 🧑‍💻 Interactive + CLI modes  
+
+---
+
+## 🛠️ Installation
 
 ```bash
-python port_scanner.py
+git clone https://github.com/Amoonbhatti/port-scanner.git
+cd port-scanner
+pip install colorama
